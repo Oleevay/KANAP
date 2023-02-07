@@ -1,6 +1,6 @@
-const product = window.location.search;
-let urlParams = new URLSearchParams(product);
-let id = urlParams.get("id");
+const article = window.location.search;
+let params = new URLSearchParams(article);
+let id = params.get("id");
 
 // On récupère uniquement le produit dont on a besoin via le paramètre dans la requête
 fetch(`http://localhost:3000/products/${id}`)
