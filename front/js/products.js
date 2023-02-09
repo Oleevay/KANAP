@@ -1,60 +1,64 @@
 const queryString = window.location.search;
-let urlParams = new URLSearchParams(queryString);
-let id = urlParams.get("id");
+let params = new URLSearchParams(queryString);
+let id = params.get("id");
 
 // On récupère uniquement le produit dont on a besoin via le paramètre dans la requête
- const allProduct = fetch(`http://localhost:3000/api/products/${id}`)
+fetch(`http://localhost:3000/api/products/${id}`)
   // Quand tu as la réponse donne le résultat en json.
-  .then((reponse) => reponse.json()
-        // Ce que tu as reçu et qui a été traité en json sera appelé data
-        .then((data) => { 
-    //Sort moi les informations en console sur ce qui ta été demandé
-    handleAllProducts(data)}));
+  .then((reponse) =>
+    reponse
+      .json()
+      // Ce que tu as reçu et qui a été traité en json sera appelé data
+      .then((data) => {
+        //Sort moi les informations en console sur ce qui ta été demandé
+        handleAllProducts(data);
+      })
+  );
 
-function handleAllProducts(resultatApi){
+function handleAllProducts(resultatApi) {
   let addSofa = resultatApi;
+  image(addSofa);
+  title(addSofa);
+  price(addSofa);
+  description(addSofa);
+ color(addSofa);
 
-  function image (imageUrl, altTxt){
-    let parentElement = document.querySelector("#items_img");
-    parentElement.appendChild(imageElement)
-    let imageElement = document.querySelector("img");
-    imageElement.src = addSofa.imageUrl;
-    imageElement.alt = addSofa.altTxt;
-  }
+}
 
-function title (name){
+function image(addSofa) {
+  let parentElement = document.querySelector(".item__img");
+  let imageElement = document.createElement("img");
+  imageElement.src = addSofa.imageUrl;
+  imageElement.alt = addSofa.altTxt;
+parentElement.appendChild(imageElement);
+}
+
+function title(addSofa) {
   let nameElement = document.querySelector("#title");
   nameElement.innerText = addSofa.name;
 }
- 
-function description (p){
+
+function price(addSofa) {
+  let spanElement = document.querySelector("#price");
+  spanElement.innerText = addSofa.price;
+}
+
+function description(addSofa) {
   let pElement = document.querySelector("#description");
   pElement.innerText = addSofa.description;
 }
 
-  function price (span){
-  let spanElement = document.querySelector("#price");
-  spanElement.innerText = addSofa.price;
-  //let priceElement = document.querySelector("#price");
-  }
-
-  function color (colors){
-  let colorSelect = document.getElementById("#colors");
-  for (let i = 0; i < handleProducts.color; i++) {
+function color(addSofa) {
+  let colorSelect = document.getElementById("colors");
+  for (let i = 0; i <addSofa.colors.length;i++) {
     let option = document.createElement("option");
     option.value = color;
-    option.innerText = addSofa.color;
+    option.innerText = addSofa.colors[i];
     colorSelect.appendChild(option);
   }
 }
-}
 
-function addToCart(){
+function addToCart() {
   const btn = document.querySelector("#addToCart");
- btn.addEventListener("click" , (event)  =>
-console.log("click!"))};
- 
-
-
-
-
+  btn.addEventListener("click", (event) => console.log("click!"));
+}
