@@ -75,26 +75,38 @@ function addToCart() {
   //Evénement sur le btn lors du click
   btn.addEventListener("click", (event) => {
   //console.log("click!"));........
-  
+
   //Récuperation de lélement du Dom pour les couleurs
  const color = document.querySelector("#colors").value;
  //Récuperation de lélement du Dom pour les quantitées
   const quantity = document.querySelector("#quantity").value;
   //Condition lors de la selection de la quantitée et de la couleur
   if ( quantity < 1 || quantity > 100 && color == null){
+    //pop up
     alert ("veuillez selectionner la couleur et la quantité")
   }
 
-  //
+  //.....le localStorage.......................
+
+  const dataElement ={
+    id: id,
+    color: color,
+    quantity: Number (quantity),
+    price: price,
+  }
+
+ //Récupétration des informations stockés dans le localstorage
+ let dataElemlent = window.localStorage.setItem("dataElement");
+  //Transformation des informations en JSON
+  const productCart = JSON.stringify(dataElement);
+ //Stokage des informations dans le localstorage
+ window.localStorage.setItem("dataElement,productCart");
+//Vérification des informations dans le localstorage
+if(dataElemlent === null){
+console.log(dataElemlent)
+}
+else{
+  dataElemlent = JSON.parse(dataElemlent);
+}
 })
 }
-
-
-//
-
-
-
-
-
-
-//
