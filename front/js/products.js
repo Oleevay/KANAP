@@ -38,7 +38,7 @@ function image(addSofa) {
   parentElement.appendChild(imageElement);
 }
 
-//Création de la fonction  title 
+//Création de la fonction  title
 function title(addSofa) {
   let nameElement = document.querySelector("#title");
   nameElement.innerText = addSofa.name;
@@ -50,13 +50,13 @@ function price(addSofa) {
   spanElement.innerText = addSofa.price;
 }
 
-//Création de la fonction 
+//Création de la fonction
 function description(addSofa) {
   let pElement = document.querySelector("#description");
   pElement.innerText = addSofa.description;
 }
 
-//Création de la fonction 
+//Création de la fonction
 function color(addSofa) {
   let colorSelect = document.getElementById("colors");
   for (let i = 0; i < addSofa.colors.length; i++) {
@@ -72,22 +72,26 @@ function addToCart() {
   //Gestion des bouttons
   const btn = document.querySelector("#addToCart");
   //Evénement sur le btn lors du click
-  btn.addEventListener("click", (event) => {
+  btn.addEventListener("click", handleClick) 
     //console.log("click!"));........
 
+    function handleClick(){
     //Récuperation de lélement du Dom pour les couleurs
     const color = document.querySelector("#colors").value;
     //Récuperation de lélement du Dom pour les quantitées
     const quantity = document.querySelector("#quantity").value;
-    //Condition lors de la selection de la quantitée et de la couleur
-    if (quantity < 1 || (quantity > 100 && color == null)) {
+
+     //Condition lors de la selection de la quantitée et de la couleur
+     if (quantity < 1 || (quantity > 100 && color == null)) {
       //pop up
       alert("veuillez selectionner la couleur et la quantité");
     }
+    }
+
 
     //.....le localStorage.......................
     const dataElement = {
-     id: id,
+      id: id,
       color: color,
       quantity: Number(quantity),
       price: price,
@@ -100,7 +104,7 @@ function addToCart() {
     const productCart = JSON.stringify(productItems);
 
     //Stokage des informations dans le localstorage
-    window.localStorage.setItem("dataElement",productCart);
+    window.localStorage.setItem("dataElement", productCart);
 
     //Vérification des informations dans le localstorage
     if (dataElement === null) {
