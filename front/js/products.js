@@ -86,12 +86,12 @@ function addToCart() {
     }
 
     //.....le localStorage.......................
-   // const dataElement = {
-     // id: id,
-     // color: color,
-     // quantity: Number(quantity),
-     // price: price,
-   // };
+    const dataElement = {
+     id: id,
+      color: color,
+      quantity: Number(quantity),
+      price: price,
+    };
 
     //Récupération des informations stockés dans le localstorage
     let productItems = window.localStorage.setItem("dataElement");
@@ -103,10 +103,10 @@ function addToCart() {
     window.localStorage.setItem("dataElement",productCart);
 
     //Vérification des informations dans le localstorage
-    if (dataElemlent === null) {
+    if (dataElement === null) {
       //console.log(dataElemlent)
     } else {
-      dataElemlent = JSON.parse(dataElemlent);
+      dataElement = JSON.parse(dataElement);
     }
   });
 }
