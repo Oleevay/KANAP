@@ -26,9 +26,9 @@ function handleAllProducts(resultatApi) {
   color(addSofa);
   addToCart();
 }
-//on crait la function image
+//On crait la function image
 function image(addSofa) {
-  //on selectionne l'id de item__img
+  //On selectionne l'id de item__img
   let parentElement = document.querySelector(".item__img");
   //On crait lélément image
   let imageElement = document.createElement("img");
@@ -38,25 +38,25 @@ function image(addSofa) {
   parentElement.appendChild(imageElement);
 }
 
-//je crée la fonction title et
+//Création de la fonction  title 
 function title(addSofa) {
   let nameElement = document.querySelector("#title");
   nameElement.innerText = addSofa.name;
 }
 
-//je crée la function pour afficher le prix
+//Création de  la function pour afficher le prix
 function price(addSofa) {
   let spanElement = document.querySelector("#price");
   spanElement.innerText = addSofa.price;
 }
 
-//je crée la function
+//Création de la fonction 
 function description(addSofa) {
   let pElement = document.querySelector("#description");
   pElement.innerText = addSofa.description;
 }
 
-//je crée la function
+//Création de la fonction 
 function color(addSofa) {
   let colorSelect = document.getElementById("colors");
   for (let i = 0; i < addSofa.colors.length; i++) {
@@ -67,7 +67,7 @@ function color(addSofa) {
   }
 }
 
-//création de la fonction addToCart
+//Création de la fonction addToCart
 function addToCart() {
   //Gestion des bouttons
   const btn = document.querySelector("#addToCart");
