@@ -72,45 +72,72 @@ function addToCart() {
   //Gestion des bouttons
   const btn = document.querySelector("#addToCart");
   //Evénement sur le btn lors du click
-  btn.addEventListener("click", handleClick) 
-    //console.log("click!"));........
+  btn.addEventListener("click",function (event) {
+//console.log("click!"));........
 
-    function handleClick(){
-    //Récuperation de lélement du Dom pour les couleurs
-    const color = document.querySelector("#colors").value;
-    //Récuperation de lélement du Dom pour les quantitées
-    const quantity = document.querySelector("#quantity").value;
+  })}
 
+  function storage(){
+ //Récupération de lélement du Dom pour les couleurs
+ const color = document.querySelector("#colors").value;
+ //Récupération de l'élement du Dom pour les quantitées
+const quantity = document.querySelector("#quantity").value;
+
+//.....le localStorage.......................
+const dataElement = {
+  id: id,
+  color: color,
+  quantity: Number(quantity),
+  price: price,
+}
+      //Récupération des informations stockés dans le localstorage
+      let productItems = JSON.parse(localStorage.getItem("dataElement"));
+      
      //Condition lors de la selection de la quantitée et de la couleur
-     if (quantity < 1 || (quantity > 100 && color == null)) {
+     if ((quantity < 1 || quantity > 100)  || (color == "")) {
       //pop up
       alert("veuillez selectionner la couleur et la quantité");
     }
-    }
-
-
-    //.....le localStorage.......................
-    const dataElement = {
-      id: id,
-      color: color,
-      quantity: Number(quantity),
-      price: price,
+    else
+    //Vérifier si le panier est vide
+    if (productItems){
+      let index = productItems.findIndex(productInItems => productInItems.id+"-"+productInItems.color === dataElement.id+"-"+ dataElement.color);
+        let filter = productItems.filter(productInItems => productInItems.id == dataElement.id && productInItems.color == dataElement.color);
+        if (index >= 0){ 
+                  
+           // si il a trouvé un élément ayant le même id et la même couleur
+          let findQuantity = parseInt(filter[0].quantity);
+          let updatedQuantity = parseInt(findQuantity) + parseInt(quantity);            
+          selection.quantity =  updatedQuantity.toString(),                
+         
+          // Met à jour la quantité sur la ligne trouvée
+          productItems[index] = dataElement;  
+          productItems.sort(productItems("id")); 
+          // trie le panier
+          localStorage.setItem("productItems", JSON.stringify( productItems)); 
+          // sauvegarde le panier modifié
+          itemAdded();
+      }
+      else{
+          //Si  il n'a pas trouvé de produit ayant le même id et même couleur alors il l'ajoute
+          // (code simple pour ajouter quelque chose au panier)
+          productItems.push(dataElement);
+          productItems.sort(productItems("id")); 
+          // trie le panier
+          localStorage.setItem("productItems", JSON.stringify(productItems));   
+          // sauvegarde le panier
+          itemAdded();
+      } 
+  }
+  else{
+      // si le panier est vide
+      let productItems = []; 
+       // on le crée        
+      productItems.push(dataElement); 
+      // on lui ajoute le produit
+      localStorage.setItem("productItems", JSON.stringify( productItems)); 
+      // sauvegarde le panier
+      itemAdded();
+      }
     };
 
-    //Récupération des informations stockés dans le localstorage
-    let productItems = window.localStorage.setItem("dataElement");
-
-    //Transformation des informations en JSON
-    const productCart = JSON.stringify(productItems);
-
-    //Stokage des informations dans le localstorage
-    window.localStorage.setItem("dataElement", productCart);
-
-    //Vérification des informations dans le localstorage
-    if (dataElement === null) {
-      //console.log(dataElemlent)
-    } else {
-      dataElement = JSON.parse(dataElement);
-    }
-  });
-}
